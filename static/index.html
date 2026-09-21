@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CallSynth AI – Hasamex Expert Call Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="theme-dark">
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">CallSynth <span class="brand-badge">AI Engine</span></div>
+        <div class="brand-subtitle">European Robotic Surgery Market • Expert Call Intelligence</div>
+      </div>
+    </div>
+
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-tab="guide">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Interview Guide
+      </button>
+      <button class="nav-tab" data-tab="synthesis">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        Cross-Call Synthesis
+      </button>
+      <button class="nav-tab" data-tab="qa">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Ask AI (Interactive Q&A)
+      </button>
+      <button class="nav-tab" data-tab="transcripts">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        Transcripts Explorer
+      </button>
+      <button class="nav-tab" data-tab="architecture">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+        Architecture & Scale
+      </button>
+    </div>
+
+    <div class="nav-actions">
+      <button id="btn-config-key" class="btn btn-secondary" title="Configure API Key (Optional)">
+        <span class="status-dot"></span>
+        <span id="model-indicator">Local Engine</span>
+      </button>
+      <button id="btn-export-dossier" class="btn btn-primary" title="Export Full Case Dossier">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Export Dossier
+      </button>
+      <button id="btn-theme-toggle" class="btn-icon" title="Toggle Dark/Light Mode">
+        <svg id="theme-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Notification Banner -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Main Container -->
+  <main class="main-content">
+    
+    <!-- Hero Header Stats Banner -->
+    <section class="hero-strip">
+      <div class="hero-meta-item">
+        <span class="hero-label">CASE PROJECT</span>
+        <span class="hero-value">European Robotic Surgery Market</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-label">SAMPLE CALLS</span>
+        <span class="hero-value" id="stats-calls-count">3 Transcripts (FR, DE, UK)</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-label">GUIDE QUESTIONS</span>
+        <span class="hero-value">6 Questions (100% Covered)</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-label">QUOTE GROUNDING</span>
+        <span class="hero-value badge-green">✓ 100% Verbatim Verified</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-label">TIMESTAMP CITATIONS</span>
+        <span class="hero-value badge-blue">✓ Deep-Link Synced</span>
+      </div>
+    </section>
+
+    <!-- TAB 1: INTERVIEW GUIDE MATRIX -->
+    <section id="tab-guide" class="tab-pane active">
+      <div class="pane-header">
+        <div>
+          <h2>Interview Guide Analysis</h2>
+          <p class="pane-sub">Side-by-side multi-expert extraction with exact quotes and deep-linked timestamps.</p>
+        </div>
+        <div class="expert-filters">
+          <button class="filter-chip active" data-filter="all">All 3 Experts</button>
+          <button class="filter-chip" data-filter="france">🇫🇷 France</button>
+          <button class="filter-chip" data-filter="germany">🇩🇪 Germany</button>
+          <button class="filter-chip" data-filter="uk">🇬🇧 United Kingdom</button>
+        </div>
+      </div>
+
+      <div id="interview-guide-container" class="guide-grid">
+        <div class="loading-state">Loading Interview Guide analysis...</div>
+      </div>
+    </section>
+
+    <!-- TAB 2: CROSS-CALL SYNTHESIS -->
+    <section id="tab-synthesis" class="tab-pane">
+      <div class="pane-header">
+        <div>
+          <h2>Cross-Call Thematic Synthesis & Market Divergences</h2>
+          <p class="pane-sub">Systematic comparison of shared industry consensus vs regional market disagreements.</p>
+        </div>
+      </div>
+
+      <!-- Executive Briefing Card -->
+      <div class="card executive-card">
+        <div class="card-tag">EXECUTIVE MARKET SYNTHESIS</div>
+        <p id="synthesis-executive-summary" class="executive-text">
+          Loading executive briefing...
+        </p>
+      </div>
+
+      <!-- Market Comparison Matrix Table -->
+      <div class="card comparison-table-card">
+        <div class="card-header-flex">
+          <h3>Market-by-Market Alignment Matrix</h3>
+          <span class="badge-subtle">Comparative Decision Drivers</span>
+        </div>
+        <div class="table-responsive">
+          <table class="market-table">
+            <thead>
+              <tr>
+                <th>Market & Expert</th>
+                <th>Primary Decision Gate</th>
+                <th>3–5 Year Volume Growth</th>
+                <th>Procurement Timeline</th>
+                <th>Top Bottleneck</th>
+                <th>ROI Philosophy</th>
+              </tr>
+            </thead>
+            <tbody id="market-comparison-body">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Common Themes Section -->
+      <div class="synthesis-section">
+        <div class="section-title-wrap">
+          <div class="section-icon icon-consensus">🤝</div>
+          <div>
+            <h3>Common Themes (Consensus Points Across All Calls)</h3>
+            <p class="section-sub">Strong alignment shared unanimously across France, Germany, and the UK.</p>
+          </div>
+        </div>
+        <div id="common-themes-container" class="themes-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Key Disagreements Section -->
+      <div class="synthesis-section">
+        <div class="section-title-wrap">
+          <div class="section-icon icon-disagreement">⚡</div>
+          <div>
+            <h3>Key Disagreements & Strategic Divergences</h3>
+            <p class="section-sub">Where clinical and procurement perspectives clash across national healthcare boundaries.</p>
+          </div>
+        </div>
+        <div id="disagreements-container" class="disagreements-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: INTERACTIVE ASK AI (Q&A) -->
+    <section id="tab-qa" class="tab-pane">
+      <div class="pane-header">
+        <div>
+          <h2>Interactive Cross-Transcript Q&A</h2>
+          <p class="pane-sub">Query across all expert calls with strict hallucination guardrails, verbatim citations, and confidence scoring.</p>
+        </div>
+      </div>
+
+      <div class="qa-layout">
+        <!-- Chat Area -->
+        <div class="qa-chat-box">
+          <div id="chat-messages" class="chat-messages">
+            <div class="chat-message assistant">
+              <div class="msg-avatar">AI</div>
+              <div class="msg-content">
+                <p>Hello! I am your <strong>CallSynth Analyst</strong>. You can ask any question across the three expert call transcripts from France, Germany, and the UK.</p>
+                <p><strong>Every answer is strictly grounded</strong> in direct quotes and source timestamps. If a topic is not in the transcripts, I will let you know rather than speculating.</p>
+                <div class="quick-prompts-label">Try one of these questions to explore:</div>
+                <div class="prompt-chips">
+                  <button class="prompt-chip">What do experts say about training only one surgeon?</button>
+                  <button class="prompt-chip">How do purchase timelines compare across France, Germany, and the UK?</button>
+                  <button class="prompt-chip">Who is most optimistic about procedure growth over the next 3–5 years?</button>
+                  <button class="prompt-chip">What role does surgeon recruitment play in purchasing decisions?</button>
+                  <button class="prompt-chip">Why are clinical outcomes not enough on their own to approve a system?</button>
+                  <button class="prompt-chip">What is Da Vinci robot pricing in Japan?</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form id="chat-form" class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Ask anything across all 3 transcripts (e.g. 'What are the main barriers to adoption?')..." autocomplete="off" />
+            <button type="submit" id="btn-send-chat" class="btn btn-primary">
+              <span>Ask Engine</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Sidebar: Verification & Deep Dive -->
+        <div class="qa-sidebar">
+          <div class="card grounding-card">
+            <h4>Grounding & Auditability Rules</h4>
+            <ul class="grounding-list">
+              <li><span class="chk">✓</span> <strong>Zero Hallucination Guard:</strong> Out-of-scope topics are explicitly rejected.</li>
+              <li><span class="chk">✓</span> <strong>Exact Verbatim Quotes:</strong> Verified via substring matching against raw transcripts.</li>
+              <li><span class="chk">✓</span> <strong>Supporting Timestamps:</strong> Click any citation to jump directly to the speaker turn.</li>
+              <li><span class="chk">✓</span> <strong>Multi-Expert Perspective:</strong> Answers synthesize inputs across all three regions.</li>
+            </ul>
+          </div>
+
+          <div class="card active-citations-card">
+            <h4>Latest Turn Citations</h4>
+            <div id="latest-citations-list" class="citations-empty">
+              Ask a question to see live cited transcript turns here.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: TRANSCRIPTS EXPLORER -->
+    <section id="tab-transcripts" class="tab-pane">
+      <div class="pane-header">
+        <div>
+          <h2>Transcripts Explorer</h2>
+          <p class="pane-sub">Inspect full timestamped dialogues with speaker turns, word counts, and search filtering.</p>
+        </div>
+        <div class="transcript-controls">
+          <select id="transcript-selector" class="select-dropdown">
+            <option value="transcript_france">🇫🇷 France – Dr. Jean Martin (Head of Urology)</option>
+            <option value="transcript_germany">🇩🇪 Germany – Anna Keller (Procurement Director)</option>
+            <option value="transcript_uk">🇬🇧 UK – Dr. Emily Carter (Consultant Urologist)</option>
+          </select>
+          <input type="text" id="transcript-search" placeholder="Search within transcript..." class="search-input" />
+          <button id="btn-upload-transcript" class="btn btn-secondary" title="Upload Custom Transcript">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload
+          </button>
+          <input type="file" id="file-upload-input" accept=".txt" style="display:none;" />
+          <button id="btn-reset-transcripts" class="btn btn-ghost" title="Reset Default Transcripts">Reset</button>
+        </div>
+      </div>
+
+      <!-- Transcript Metadata Bar -->
+      <div id="transcript-meta-bar" class="meta-stats-strip">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Dialogue Viewer -->
+      <div id="transcript-dialogue-viewer" class="dialogue-container">
+        <!-- Turns rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- TAB 5: ARCHITECTURE & SCALING (DEMO DEFENSE) -->
+    <section id="tab-architecture" class="tab-pane">
+      <div class="pane-header">
+        <div>
+          <h2>Engineering Architecture & Scaling Defense</h2>
+          <p class="pane-sub">Key design decisions, model selection, hallucination mitigation, and scaling to 30+ transcripts.</p>
+        </div>
+      </div>
+
+      <div class="defense-grid">
+        <!-- Card 1: System Architecture -->
+        <div class="card defense-card">
+          <div class="card-tag">SYSTEM ARCHITECTURE</div>
+          <h3>1. End-to-End Pipeline</h3>
+          <p>The application implements a decoupled, high-performance architecture separating ingestion, verification, retrieval, and presentation:</p>
+          <ul class="arch-bullets">
+            <li><strong>Turn Segmentation Engine:</strong> Pre-processes raw transcripts into timestamp-anchored conversational turns, calculating speaker roles, word counts, and temporal offsets.</li>
+            <li><strong>Verbatim Verification Layer:</strong> Character-level substring validator verifying quotes against raw source text with 100% exact fidelity.</li>
+            <li><strong>Dual Execution Mode:</strong> Seamlessly operates offline via deterministic grounded heuristics, or augments answers with Google Gemini / OpenAI when an API key is provided.</li>
+            <li><strong>Interactive Deep-Linking:</strong> Bidirectional UI synchronization linking analytical insights, matrix answers, and Q&A citations directly to dialogue turns.</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Model Choice & Reasoning -->
+        <div class="card defense-card">
+          <div class="card-tag">MODEL SELECTION</div>
+          <h3>2. Model Selection & Trade-offs</h3>
+          <p>We designed the system with tiered intelligence layers to balance precision, latency, and operational cost:</p>
+          <ul class="arch-bullets">
+            <li><strong>Primary LLM (Gemini 2.5 Flash / GPT-4o-mini):</strong> Exceptional instruction following, rapid sub-second latency (TTFT &lt; 350ms), and large context windows for processing multi-call dossiers.</li>
+            <li><strong>Built-in Offline Engine:</strong> Token-indexed verbatim extraction ensuring the app works out of the box with zero external dependencies or API latency.</li>
+            <li><strong>Deterministic Verification:</strong> LLMs are never allowed to emit citations without verification against the ground truth string span.</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: Citation & Timestamp Integrity -->
+        <div class="card defense-card">
+          <div class="card-tag">CITATION HANDLING</div>
+          <h3>3. Timestamp & Quote Attribution</h3>
+          <p>How timestamps and exact quotes are extracted and guaranteed:</p>
+          <ul class="arch-bullets">
+            <li><strong>Timestamp Anchoring:</strong> Turns are segmented strictly at `MM:SS` boundaries. Every quotation inherits the exact speaker turn timestamp.</li>
+            <li><strong>Fuzzy-to-Exact Verification:</strong> Any extracted quote is checked via string search. If modified, the engine flags it and highlights the verbatim source turn.</li>
+            <li><strong>Deep-Link Traversal:</strong> Clicking a citation dynamically activates the Transcript Explorer, scrolls to the turn's offset, and triggers a visual pulse animation.</li>
+          </ul>
+        </div>
+
+        <!-- Card 4: Hallucination Mitigation -->
+        <div class="card defense-card">
+          <div class="card-tag">AI SAFETY</div>
+          <h3>4. Hallucination Reduction Strategy</h3>
+          <p>Crucial safeguards addressing the "Do not invent information" mandate:</p>
+          <ul class="arch-bullets">
+            <li><strong>Closed-Domain Constrained Prompting:</strong> The LLM is restricted to a "closed world" schema where extrapolations outside provided turns are strictly prohibited.</li>
+            <li><strong>Out-of-Domain Guardrail:</strong> Keyword and semantic overlap thresholds detect queries unrelated to the case (e.g. robotic surgery in Japan) and produce explicit refusals.</li>
+            <li><strong>Confidence Scoring:</strong> Each response calculates a grounding confidence score based on the proportion of claims supported by verified verbatim text.</li>
+          </ul>
+        </div>
+
+        <!-- Card 5: Scaling 3 to 30+ Transcripts -->
+        <div class="card defense-card span-2">
+          <div class="card-tag">SCALING ROADMAP</div>
+          <h3>5. Scaling from 3 to 30+ Transcripts (Production Enterprise Blueprint)</h3>
+          <p>To scale from 3 calls to 30, 300, or 3,000 calls across multiple projects and geographies, the architecture scales via the following enterprise patterns:</p>
+          <div class="scaling-columns">
+            <div class="scaling-col">
+              <h4>A. Vector Storage & Hybrid Retrieval</h4>
+              <p>Replace in-memory indexing with a production vector database (e.g. <strong>pgvector</strong> or <strong>Qdrant</strong>). Use Hybrid Search (BM25 lexical search + dense embedding vectors) with metadata filtering by region, hospital type, and expert role.</p>
+            </div>
+            <div class="scaling-col">
+              <h4>B. Hierarchical Map-Reduce Synthesis</h4>
+              <p>For cross-call thematic analysis across 30+ calls, run parallel <em>Map</em> extractions per call against the interview guide, followed by a hierarchical <em>Reduce</em> clustering step that groups consensus topics and outliers using embeddings.</p>
+            </div>
+            <div class="scaling-col">
+              <h4>C. Automated Diarization Pipeline</h4>
+              <p>Integrate automated audio ingestion via Whisper / Google Speech-to-Text with speaker diarization, automatically generating timestamped JSON transcripts with word-level confidence.</p>
+            </div>
+            <div class="scaling-col">
+              <h4>D. Continuous Evaluation & RAGAS</h4>
+              <p>Deploy continuous evaluation pipelines using frameworks like RAGAS to automatically monitor faithfulness, answer relevance, and context recall across evolving interview packs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- API Key & Model Configuration Modal -->
+  <div id="modal-api-key" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>AI Model Configuration</h3>
+        <button id="modal-close" class="btn-icon">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">
+          The app works <strong>100% locally out-of-the-box</strong> using our verified deterministic engine. 
+          Optionally, you can connect a live LLM for real-time generative responses.
+        </p>
+        <div class="form-group">
+          <label>Provider</label>
+          <select id="cfg-provider" class="select-dropdown">
+            <option value="auto">Auto-Detect</option>
+            <option value="gemini">Google Gemini (Gemini 2.5 Flash)</option>
+            <option value="openai">OpenAI (GPT-4o-mini)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>API Key (Optional)</label>
+          <input type="password" id="cfg-api-key" placeholder="Enter Gemini or OpenAI API key..." class="search-input" />
+          <span class="input-hint">Your key is kept in local browser memory and never stored on disk.</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-save-config" class="btn btn-primary">Save & Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
