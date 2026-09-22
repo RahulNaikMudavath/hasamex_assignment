@@ -98,15 +98,22 @@ class QAEngine:
             "year", "years", "month", "months", "trend", "purchase", "purchasing", "committee"
         }
         
+        # Out-of-scope entities (geographies / specialties not present in the European case pack)
+        out_of_scope_terms = {
+            "japan", "tokyo", "china", "beijing", "asia", "asian", "us", "usa", "america", "american", 
+            "australia", "canada", "brazil", "india", "cardiology", "orthopedic", "orthopedics", "neurology"
+        }
+        
         query_words = set(re.findall(r'\w+', query_strip.lower()))
         domain_overlap = query_words.intersection(domain_keywords)
+        out_of_scope_overlap = query_words.intersection(out_of_scope_terms)
         
-        if not relevant_turns or len(domain_overlap) == 0:
+        if not relevant_turns or len(domain_overlap) == 0 or len(out_of_scope_overlap) > 0:
             return QAResponse(
                 query=query,
                 answer=(
                     "⚠️ **Not Mentioned in Transcripts**\n\n"
-                    "This topic is not addressed in any of the three expert call transcripts. "
+                    "This topic (or specific geography/specialty) is not addressed in any of the three expert call transcripts. "
                     "The transcripts specifically cover robotic surgery adoption, economics, surgeon training, "
                     "procurement timelines, and market outlook across France, Germany, and the United Kingdom."
                 ),

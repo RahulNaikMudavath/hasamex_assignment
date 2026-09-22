@@ -48,3 +48,11 @@ def test_qa_out_of_domain_refusal():
     data = res.json()
     assert data["is_grounded"] is False
     assert "Not Mentioned in Transcripts" in data["answer"]
+
+def test_qa_japan_out_of_scope_refusal():
+    res = client.post("/api/qa", json={"query": "What is Da Vinci robot pricing in Japan?"})
+    assert res.status_code == 200
+    data = res.json()
+    assert data["is_grounded"] is False
+    assert "Not Mentioned in Transcripts" in data["answer"]
+    assert len(data["citations"]) == 0
