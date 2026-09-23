@@ -162,4 +162,7 @@ def serve_index():
 if __name__ == "__main__":
     import uvicorn
     print("Starting CallSynth AI application on http://localhost:8000")
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    try:
+        uvicorn.run("main:app", host="127.0.0.1", port=8000)
+    except (KeyboardInterrupt, SystemExit):
+        print("\nCallSynth AI server stopped cleanly.")
