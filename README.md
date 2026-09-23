@@ -102,7 +102,7 @@ To scale from 3 sample transcripts to an enterprise repository of 30, 300, or 3,
 
 ---
 
-## ⚡ Quickstart & Local Execution
+## ⚡ Instructions to Run the Application Locally (Quickstart)
 
 ### Prerequisites
 - Python 3.10+ (Tested on Python 3.14)
