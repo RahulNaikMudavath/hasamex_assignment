@@ -1,7 +1,8 @@
 # CallSynth AI – Expert Call Intelligence Platform
 ### Hasamex AI Engineer Technical Case Study • Round 2 Submission
+**Candidate:** Rahul Naik Mudavath | **GitHub:** [RahulNaikMudavath/hasamex_assignment](https://github.com/RahulNaikMudavath/hasamex_assignment)
 
-[![Tests](https://img.shields.io/badge/pytest-10%20passed-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/pytest-11%20passed-brightgreen.svg)]()
 [![Grounding](https://img.shields.io/badge/quote%20grounding-100%25%20verbatim-blue.svg)]()
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.141.1-009688.svg)]()
 [![Python](https://img.shields.io/badge/Python-3.14-blue.svg)]()
@@ -109,8 +110,8 @@ To scale from 3 sample transcripts to an enterprise repository of 30, 300, or 3,
 
 ### 1. Clone & Navigate
 ```bash
-git clone <your-repo-url>
-cd hasamex
+git clone https://github.com/RahulNaikMudavath/hasamex_assignment.git
+cd hasamex_assignment
 ```
 
 ### 2. Install Dependencies
@@ -138,7 +139,7 @@ python -m pytest -v
 ### Test Coverage:
 - `test_parser.py`: Verifies timestamp parsing, speaker turn extraction, and metadata calculation.
 - `test_verification.py`: Verifies that 100% of extracted quotes match the raw transcripts verbatim.
-- `test_api.py`: Tests all API endpoints (`/api/health`, `/api/transcripts`, `/api/interview-guide`, `/api/synthesis`, `/api/qa`, `/api/verify-quote`).
+- `test_api.py`: Tests all API endpoints (`/api/health`, `/api/transcripts`, `/api/interview-guide`, `/api/synthesis`, `/api/qa`, `/api/verify-quote`, out-of-domain refusals).
 
 ```text
 tests/test_api.py::test_health PASSED
@@ -147,12 +148,13 @@ tests/test_api.py::test_get_interview_guide PASSED
 tests/test_api.py::test_get_synthesis PASSED
 tests/test_api.py::test_qa_grounded_query PASSED
 tests/test_api.py::test_qa_out_of_domain_refusal PASSED
+tests/test_api.py::test_qa_japan_out_of_scope_refusal PASSED
 tests/test_parser.py::test_parse_timestamp_seconds PASSED
 tests/test_parser.py::test_load_transcripts PASSED
 tests/test_verification.py::test_all_interview_guide_quotes_are_verbatim PASSED
 tests/test_verification.py::test_full_analysis_structure PASSED
 
-======================== 10 passed in 0.38s ========================
+======================== 11 passed in 0.40s ========================
 ```
 
 ---
@@ -160,31 +162,32 @@ tests/test_verification.py::test_full_analysis_structure PASSED
 ## 📁 Repository Structure
 
 ```text
-hasamex/
-├── case_pack/                     # Official Case Study Materials
-│   ├── Interview_Guide.txt        # 6 interview guide questions & project objective
-│   ├── README_CASE.md             # Case study brief and instructions
-│   ├── Transcript_1_France.txt    # Dr. Jean Martin (Head of Urology, France)
-│   ├── Transcript_2_Germany.txt   # Anna Keller (Procurement Director, Germany)
-│   └── Transcript_3_UK.txt        # Dr. Emily Carter (Consultant Urologist, UK)
-├── backend/                       # Python Core Logic & AI Services
-│   ├── parser.py                  # Transcript turn segmentation & metadata parser
-│   ├── verifier.py                # Character-level quote verification engine
-│   ├── interview_guide.py         # Complete Q1-Q6 extraction with verified citations
-│   ├── synthesis.py               # Cross-call consensus & disagreement synthesizer
-│   └── qa_engine.py               # Grounded RAG engine with hallucination guardrails
-├── static/                        # Frontend Web Application
-│   ├── index.html                 # Single-page application structure
-│   ├── style.css                  # Modern responsive design system (Dark/Light)
-│   └── app.js                     # Dynamic deep-link navigation & chat logic
-├── tests/                         # Pytest Verification Suite
-│   ├── test_parser.py             # Ingestion & turn tests
-│   ├── test_verification.py       # 100% verbatim quote verification tests
-│   └── test_api.py                # REST API endpoint tests
-├── main.py                        # FastAPI server entry point
-├── requirements.txt               # Python package dependencies
-├── DEMO_VIDEO_SCRIPT.md           # Turn-by-turn 5-10 min video presentation script
-└── README.md                      # Complete system documentation
+hasamex_assignment/
+├── case_pack/                          # Official Case Study Materials
+│   ├── Interview_Guide.txt             # 6 interview guide questions & project objective
+│   ├── README_CASE.md                  # Case study brief and instructions
+│   ├── Transcript_1_France.txt         # Dr. Jean Martin (Head of Urology, France)
+│   ├── Transcript_2_Germany.txt        # Anna Keller (Procurement Director, Germany)
+│   └── Transcript_3_UK.txt             # Dr. Emily Carter (Consultant Urologist, UK)
+├── backend/                            # Python Core Logic & AI Services
+│   ├── parser.py                       # Transcript turn segmentation & metadata parser
+│   ├── verifier.py                     # Character-level quote verification engine
+│   ├── interview_guide.py              # Complete Q1-Q6 extraction with verified citations
+│   ├── synthesis.py                    # Cross-call consensus & disagreement synthesizer
+│   └── qa_engine.py                    # Grounded RAG engine with hallucination guardrails
+├── static/                             # Frontend Web Application
+│   ├── index.html                      # Single-page application structure
+│   ├── style.css                       # Modern responsive design system (Dark/Light)
+│   └── app.js                          # Dynamic deep-link navigation & chat logic
+├── tests/                              # Pytest Verification Suite
+│   ├── test_parser.py                  # Ingestion & turn tests
+│   ├── test_verification.py            # 100% verbatim quote verification tests
+│   └── test_api.py                     # REST API endpoint tests (11 passing)
+├── main.py                             # FastAPI server entry point
+├── requirements.txt                    # Python package dependencies
+├── Hasamex_Demo_Presentation_Guide.pdf # Turn-by-turn presentation script & rubric PDF
+├── DEMO_VIDEO_SCRIPT.md                # 6-8 min video walkthrough presentation script
+└── README.md                           # Complete system documentation
 ```
 
 ---
